@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="hoth-data-updater" />
+        <module name="hoth-starwars-client" />
+        <module name="hoth-data" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="hoth-data" target="17" />
+      <module name="hoth-data-updater" target="17" />
+      <module name="hoth-starwars-client" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="hoth-data" options="-parameters" />
+      <module name="hoth-data-updater" options="-parameters" />
+      <module name="hoth-starwars-client" options="-parameters" />
+    </option>
+  </component>
+</project>

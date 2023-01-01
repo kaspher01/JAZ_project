@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/hoth.iml" filepath="$PROJECT_DIR$/hoth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hoth-data/hoth-data.iml" filepath="$PROJECT_DIR$/hoth-data/hoth-data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hoth-data-updater/hoth-data-updater.iml" filepath="$PROJECT_DIR$/hoth-data-updater/hoth-data-updater.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hoth-starwars-client/hoth-starwars-client.iml" filepath="$PROJECT_DIR$/hoth-starwars-client/hoth-starwars-client.iml" />
+    </modules>
+  </component>
+</project>
