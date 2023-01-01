@@ -1,4 +1,4 @@
-package com.hoth.hothstarwarsclient;
+package com.hoth.client;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

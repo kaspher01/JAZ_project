@@ -1,10 +1,10 @@
-package com.hoth.hothdata;
+package com.hoth.updater;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class HothDataApplicationTests {
+class HothDataUpdaterApplicationTests {
 
     @Test
     void contextLoads() {

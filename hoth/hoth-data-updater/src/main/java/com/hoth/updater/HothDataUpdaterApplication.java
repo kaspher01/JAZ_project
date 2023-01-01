@@ -1,4 +1,4 @@
-package com.hoth.hothdataupdater;
+package com.hoth.updater;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

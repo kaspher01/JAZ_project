@@ -1,10 +1,10 @@
-package com.hoth.hothstarwarsclient;
+package com.hoth.data;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class HothStarwarsClientApplicationTests {
+class HothDataApplicationTests {
 
     @Test
     void contextLoads() {
