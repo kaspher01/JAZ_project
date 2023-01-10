@@ -1,4 +1,4 @@
-package com.hoth.client;
+package com.hoth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

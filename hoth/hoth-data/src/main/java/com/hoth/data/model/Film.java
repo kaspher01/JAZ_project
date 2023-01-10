@@ -14,7 +14,7 @@ import java.util.List;
 public class Film {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String title;
@@ -23,15 +23,18 @@ public class Film {
     private String producer;
     private Date releaseDate;
 
-    @ManyToMany(mappedBy = "film", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "films", cascade = CascadeType.ALL)
+    private List<Person> characters = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "films", cascade = CascadeType.ALL)
     private List<Species> species = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "film", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "films", cascade = CascadeType.ALL)
     private List<Starship> starships = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "film", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "films", cascade = CascadeType.ALL)
     private List<Vehicle> vehicles = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "film", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "films", cascade = CascadeType.ALL)
     private List<Planet> planets = new ArrayList<>();
 }

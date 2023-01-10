@@ -12,28 +12,28 @@ import java.util.List;
 @Setter
 public class Person {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    private String birth_year;
+    private String birthYear;
     private String gender;
     private String height;
     private String mass;
-    private String skin_color;
+    private String skinColor;
 
     @ManyToOne
     private Planet homeworld;
 
-    @ManyToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Film> films = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "people", cascade = CascadeType.ALL)
     private List<Species> species = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "pilots", cascade = CascadeType.ALL)
     private List<Starship> starships = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "pilots", cascade = CascadeType.ALL)
     private List<Vehicle> vehicles = new ArrayList<>();
 
 }

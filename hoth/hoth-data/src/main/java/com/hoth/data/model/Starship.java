@@ -10,12 +10,28 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Starship extends Vehicle{
+public class Starship{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String mglt;
+    private String name;
+    private String model;
+    private String starshipClass;
+    private String manufacturer;
+    private String costInCredits;
+    private String length;
+    private String crew;
+    private String passengers;
+    private String maxAtmospheringSpeed;
+    private String maxMegalights;
+
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Film> films = new ArrayList<>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Person> pilots = new ArrayList<>();
 
 
 }

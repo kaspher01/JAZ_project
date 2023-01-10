@@ -13,7 +13,7 @@ import java.util.List;
 public class Vehicle {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     private String model;
@@ -25,9 +25,9 @@ public class Vehicle {
     private String passengers;
     private String maxAtmospheringSpeed;
 
-    @ManyToMany(mappedBy = "starship", cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Film> films = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "starship", cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Person> pilots = new ArrayList<>();
 }
