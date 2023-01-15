@@ -3,8 +3,16 @@ package com.hoth.client;
 import com.hoth.client.contract.FilmDto;
 import com.hoth.client.contract.PersonDto;
 import com.hoth.client.contract.ResultDto;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Component
 public class StarwarsClient implements IStarwarsClient {
@@ -17,6 +25,11 @@ public class StarwarsClient implements IStarwarsClient {
         restClient = new RestTemplate();
         this.baseUrl = settings.getBaseUrl();
         _settings = settings;
+        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
+        messageConverters.add(converter);
+        this.restClient.setMessageConverters(messageConverters);
     }
 
     @Override

@@ -9,8 +9,8 @@ import java.util.List;
 @Setter
 public class ResultDto {
 
-    private List<FilmDto> results;
     private int count;
     private String next;
     private String previous;
+    private List<FilmDto> results;
 }
