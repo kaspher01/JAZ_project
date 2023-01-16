@@ -25,11 +25,6 @@ public class StarwarsClient implements IStarwarsClient {
         restClient = new RestTemplate();
         this.baseUrl = settings.getBaseUrl();
         _settings = settings;
-        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
-        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
-        messageConverters.add(converter);
-        this.restClient.setMessageConverters(messageConverters);
     }
 
     @Override

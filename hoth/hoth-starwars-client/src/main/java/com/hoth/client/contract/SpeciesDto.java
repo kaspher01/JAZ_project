@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class SpeciesDto {
+public class SpeciesDto extends GetIdClass{
 
     private String name;
     private String classification;
@@ -40,7 +40,6 @@ public class SpeciesDto {
     @JsonProperty("films")
     private List<String> filmsUrls;
 
-    private String url;
     private String created;
     private String edited;
 }

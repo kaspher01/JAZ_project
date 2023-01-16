@@ -9,7 +9,7 @@ public interface IStarwarsClientSettings {
     default UriComponentsBuilder getUrlBuilder(){
         return UriComponentsBuilder
                 .newInstance()
-                .scheme("http")
+                .scheme("https")
                 .host(getBaseUrl());
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class VehicleDto {
+public class VehicleDto extends GetIdClass {
     private String name;
     private String model;
 
@@ -37,7 +37,6 @@ public class VehicleDto {
     @JsonProperty("pilots")
     private List<String> pilotsUrls;
 
-    private String url;
     private String created;
     private String edited;
 }

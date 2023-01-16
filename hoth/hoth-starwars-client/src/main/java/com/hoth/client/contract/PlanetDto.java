@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class PlanetDto {
+public class PlanetDto extends GetIdClass{
 
     private String name;
 
@@ -37,7 +37,6 @@ public class PlanetDto {
     @JsonProperty("films")
     private List<String> filmsUrls;
 
-    private String url;
     private String created;
     private String edited;
 }

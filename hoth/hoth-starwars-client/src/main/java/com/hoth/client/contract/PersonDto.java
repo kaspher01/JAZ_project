@@ -5,10 +5,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Getter
 @Setter
-public class PersonDto {
+public class PersonDto extends GetIdClass{
 
     private String name;
 
@@ -42,7 +44,8 @@ public class PersonDto {
     @JsonProperty("vehicles")
     private List<String> vehiclesUrls;
 
-    private String url;
     private String created;
     private String edited;
+
+
 }

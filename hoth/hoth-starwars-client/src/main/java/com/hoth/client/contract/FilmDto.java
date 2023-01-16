@@ -8,14 +8,12 @@ import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FilmDto {
+public class FilmDto extends GetIdClass{
 
     private String title;
 
@@ -47,14 +45,7 @@ public class FilmDto {
     @JsonProperty("planets")
     private List<String> planetsUrls;
 
-    private String url;
     private String created;
     private String edited;
 
-
-    public int getId() {
-        Pattern digitRegex = Pattern.compile("\\d");
-        Matcher getIdFromUrl = digitRegex.matcher(url);
-        return Integer.parseInt(getIdFromUrl.group(1));
-    }
 }
