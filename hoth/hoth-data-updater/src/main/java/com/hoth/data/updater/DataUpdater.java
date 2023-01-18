@@ -80,6 +80,12 @@ public class DataUpdater implements IUpdateData {
 
             data.getPeople().saveAll(peopleToSave);
 
+            for(Person person : data.getPeople().findAll()){
+                x.getCharacters().add(person);
+                person.getFilms().add(x);
+                data.getFilms().save(x);
+            }
+
 
         });
 

@@ -24,7 +24,7 @@ public class Person {
     @ManyToOne
     private Planet homeworld;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Film> films = new ArrayList<>();
 
     @ManyToMany(mappedBy = "people", cascade = CascadeType.ALL)
