@@ -1,18 +1,9 @@
 package com.hoth.client;
 
-import com.hoth.client.contract.FilmDto;
-import com.hoth.client.contract.PersonDto;
-import com.hoth.client.contract.ResultDto;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import com.hoth.client.contract.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 @Component
 public class StarwarsClient implements IStarwarsClient {
@@ -37,23 +28,47 @@ public class StarwarsClient implements IStarwarsClient {
         return restClient.getForObject(url, ResultDto.class);
     }
 
-    @Override
-    public FilmDto getFilm(int id) {
-        String url = _settings.getUrlBuilder()
-                .pathSegment("films", id+"/")
+    public String buildUrl(String entityName, int id){
+        return _settings.getUrlBuilder()
+                .pathSegment(entityName, id+"/")
                 .queryParam("format", "json")
                 .build()
                 .toUriString();
+    }
+
+    @Override
+    public FilmDto getFilm(int id) {
+        String url = buildUrl("films", id);
         return restClient.getForEntity(url, FilmDto.class).getBody();
     }
 
     @Override
     public PersonDto getPerson(int id) {
-        String url = _settings.getUrlBuilder()
-                .pathSegment("people", id+"/")
-                .queryParam("format", "json")
-                .build()
-                .toUriString();
+        String url = buildUrl("people", id);
         return restClient.getForEntity(url, PersonDto.class).getBody();
+    }
+
+    @Override
+    public StarshipDto getStarship(int id) {
+        String url = buildUrl("starships", id);
+        return restClient.getForEntity(url, StarshipDto.class).getBody();
+    }
+
+    @Override
+    public VehicleDto getVehicle(int id) {
+        String url = buildUrl("vehicles", id);
+        return restClient.getForEntity(url, VehicleDto.class).getBody();
+    }
+
+    @Override
+    public SpeciesDto getSpecies(int id) {
+        String url = buildUrl("species", id);
+        return restClient.getForEntity(url, SpeciesDto.class).getBody();
+    }
+
+    @Override
+    public PlanetDto getPlanet(int id) {
+        String url = buildUrl("planets", id);
+        return restClient.getForEntity(url, PlanetDto.class).getBody();
     }
 }

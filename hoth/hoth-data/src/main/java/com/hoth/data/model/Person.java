@@ -21,19 +21,19 @@ public class Person {
     private String mass;
     private String skinColor;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Planet homeworld;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private List<Film> films = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "people", cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Species> species = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "pilots", cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Starship> starships = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "pilots", cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Vehicle> vehicles = new ArrayList<>();
 
 }

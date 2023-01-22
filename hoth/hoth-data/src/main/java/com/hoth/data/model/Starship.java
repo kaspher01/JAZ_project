@@ -27,7 +27,7 @@ public class Starship{
     private String maxMegalights;
 
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Film> films = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL)

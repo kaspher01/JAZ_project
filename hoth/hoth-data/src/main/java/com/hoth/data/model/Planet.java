@@ -2,6 +2,8 @@ package com.hoth.data.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -24,10 +26,13 @@ public class Planet {
     private String terrain;
     private String surfaceWater;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Film> films = new ArrayList<>();
+
+    @ManyToMany
     private List<Person> residents = new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Film> films = new ArrayList<>();
+
 
 }

@@ -23,18 +23,18 @@ public class Film {
     private String producer;
     private Date releaseDate;
 
-    @ManyToMany(mappedBy = "films", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "films", cascade = CascadeType.MERGE)
     private List<Person> characters = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "films", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "films")
     private List<Species> species = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "films", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "films")
     private List<Starship> starships = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "films", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "films")
     private List<Vehicle> vehicles = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "films", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "films")
     private List<Planet> planets = new ArrayList<>();
 }

@@ -27,10 +27,11 @@ public class Species {
     @ManyToOne
     private Planet homeworld;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Film> films = new ArrayList<>();
+
+    @ManyToMany
     private List<Person> people = new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Film> films = new ArrayList<>();
 
 }
