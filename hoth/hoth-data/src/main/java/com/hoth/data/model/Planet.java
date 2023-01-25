@@ -7,7 +7,9 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -27,11 +29,10 @@ public class Planet {
     private String surfaceWater;
 
     @ManyToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Film> films = new ArrayList<>();
+    private Set<Film> films = new HashSet<>();
 
     @ManyToMany
-    private List<Person> residents = new ArrayList<>();
+    private Set<Person> residents = new HashSet<>();
 
 
 

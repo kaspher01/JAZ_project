@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -26,8 +26,8 @@ public class Vehicle {
     private String maxAtmospheringSpeed;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Film> films = new ArrayList<>();
+    private Set<Film> films = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Person> pilots = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Person> pilots = new HashSet<>();
 }

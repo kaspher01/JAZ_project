@@ -4,9 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Getter
@@ -24,17 +22,17 @@ public class Film {
     private Date releaseDate;
 
     @ManyToMany(mappedBy = "films", cascade = CascadeType.MERGE)
-    private List<Person> characters = new ArrayList<>();
+    private Set<Person> characters = new HashSet<>();
 
     @ManyToMany(mappedBy = "films")
-    private List<Species> species = new ArrayList<>();
+    private Set<Species> species = new HashSet<>();
 
     @ManyToMany(mappedBy = "films")
-    private List<Starship> starships = new ArrayList<>();
+    private Set<Starship> starships = new HashSet<>();
 
     @ManyToMany(mappedBy = "films")
-    private List<Vehicle> vehicles = new ArrayList<>();
+    private Set<Vehicle> vehicles = new HashSet<>();
 
     @ManyToMany(mappedBy = "films")
-    private List<Planet> planets = new ArrayList<>();
+    private Set<Planet> planets = new HashSet<>();
 }

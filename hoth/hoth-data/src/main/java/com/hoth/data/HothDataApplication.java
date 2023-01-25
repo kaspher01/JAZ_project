@@ -20,7 +20,5 @@ public class HothDataApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        var films = db.getFilms();
-        var tst = "sdafa";
     }
 }

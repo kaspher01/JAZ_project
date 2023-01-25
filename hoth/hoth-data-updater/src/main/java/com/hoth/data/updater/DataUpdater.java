@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @Component
 public class DataUpdater implements IUpdateData {
@@ -50,6 +51,8 @@ public class DataUpdater implements IUpdateData {
                 .filter(Predicate.not(entity -> filmsTitles.contains(entity.getTitle())))
                 .toList();
 
+
+
         entitiesToSave.forEach(x -> {
             data.getFilms().save(x);
 
@@ -60,207 +63,207 @@ public class DataUpdater implements IUpdateData {
                     .get();
 
 
-            //Lists of dtos that are in a film
             List<PersonDto> peopleDto = new ArrayList<>();
-            List<StarshipDto> starshipsDto = new ArrayList<>();
-            List<VehicleDto> vehiclesDtos = new ArrayList<>();
-            List<SpeciesDto> speciesDtos = new ArrayList<>();
-            List<PlanetDto> planetsDtos = new ArrayList<>();
 
-
-            //Operations on PeopleDtos
             filmDto.getCharactersUrls()
                     .forEach(l -> peopleDto.add(
                             client.getPerson(Integer.parseInt(l.replaceFirst(".*/([^/?]+).*", "$1")))
                     ));
 
-            var peopleNames = data.getPeople()
-                    .findAll()
-                    .stream()
-                    .map(Person::getName)
-                    .toList();
+            peopleDto.forEach((personDto) -> {
+                var existingPerson = data.getPeople().findPersonByName(personDto.getName());
 
-            var peopleToSave = peopleDto
-                    .stream()
-                    .filter(Predicate.not(p -> peopleNames.contains(p.getName())))
-                    .map(p -> entityMapper.forPerson().map(p))
-                    .toList();
+                var vehicleDtos = personDto.getVehiclesUrls()
+                        .stream()
+                        .map(l -> client.getVehicle(Integer.parseInt(l.replaceFirst(".*\\/(\\d+)\\/$", "$1"))))
+                        .toList();
 
+                var starshipsDtos = personDto.getStarshipsUrls()
+                        .stream()
+                        .map(l -> client.getStarship(Integer.parseInt(l.replaceFirst(".*\\/(\\d+)\\/$", "$1"))))
+                        .toList();
 
-            //Operations on StarshipsDtos
-            filmDto.getStarshipsUrls()
-                    .forEach(l -> starshipsDto.add(
-                            client.getStarship(Integer.parseInt(l.replaceFirst(".*/([^/?]+).*", "$1"))))
-                    );
+                var speciesDtos = personDto.getSpeciesUrls()
+                        .stream()
+                        .map(l -> client.getSpecies(Integer.parseInt(l.replaceFirst(".*\\/(\\d+)\\/$", "$1"))))
+                        .toList();
 
-            var starshipsNames = data.getStarships()
-                    .findAll()
-                    .stream()
-                    .map(Starship::getName)
-                    .toList();
+                if(existingPerson.isPresent()){
 
-            var starshipsToSave = starshipsDto
-                    .stream()
-                    .filter(Predicate.not(s -> starshipsNames.contains(s.getName())))
-                    .map(s -> entityMapper.forStarship().map(s))
-                    .toList();
+                    for(VehicleDto vehicleDto : vehicleDtos){
+                        var existingVehicle = data.getVehicles().findVehicleByName(vehicleDto.getName());
+                        if(existingVehicle.isPresent()){
+                            existingVehicle.get().getPilots().add(existingPerson.get());
+                            existingPerson.get().getVehicles().add(existingVehicle.get());
 
-            //Operations on VehiclesDtos
-            filmDto.getVehiclesUrls()
-                    .forEach(l -> vehiclesDtos.add(
-                            client.getVehicle(Integer.parseInt(l.replaceFirst(".*/([^/?]+).*", "$1"))))
-                    );
+                            if(!x.getVehicles().contains(existingVehicle.get())){
+                                x.getVehicles().add(existingVehicle.get());
+                                existingVehicle.get().getFilms().add(x);
+                            }
 
-            var vehilcesNames = data.getVehicles()
-                    .findAll()
-                    .stream()
-                    .map(Vehicle::getName)
-                    .toList();
+                            data.getVehicles().save(existingVehicle.get());
+                        } else {
+                            var vehicle = entityMapper.forVehicle().map(vehicleDto);
 
-            var vehiclesToSave = vehiclesDtos
-                    .stream()
-                    .filter(Predicate.not(v -> vehilcesNames.contains(v.getName())))
-                    .map(v -> entityMapper.forVehicle().map(v))
-                    .toList();
-            //Operations on SpeciesDtos
-            filmDto.getSpeciesUrls()
-                    .forEach(l -> speciesDtos.add(
-                            client.getSpecies(Integer.parseInt(l.replaceFirst(".*/([^/?]+).*", "$1"))))
-                    );
+                            vehicle.getPilots().add(existingPerson.get());
+                            existingPerson.get().getVehicles().add(vehicle);
 
-            var speciesNames = data.getSpecies()
-                    .findAll()
-                    .stream()
-                    .map(Species::getName)
-                    .toList();
+                            if(!x.getVehicles().contains(vehicle)){
+                                x.getVehicles().add(vehicle);
+                                vehicle.getFilms().add(x);
+                            }
 
-            var speciesToSave = speciesDtos
-                    .stream()
-                    .filter(Predicate.not(s -> speciesNames.contains(s.getName())))
-                    .map(s -> entityMapper.forSpecies().map(s))
-                    .toList();
+                            data.getVehicles().save(vehicle);
+                        }
 
-            //Operations on PlanetsDtos
-            filmDto.getPlanetsUrls()
-                    .forEach(l -> planetsDtos.add(
-                            client.getPlanet(Integer.parseInt(l.replaceFirst(".*/([^/?]+).*", "$1"))))
-                    );
+                    }
+                    for(StarshipDto starshipDto : starshipsDtos){
+                        var existingStarship = data.getStarships().findStarshipByName(starshipDto.getName());
+                        if(existingStarship.isPresent()){
+                            existingStarship.get().getPilots().add(existingPerson.get());
+                            existingPerson.get().getStarships().add(existingStarship.get());
 
-            var planetsNames = data.getPlanets()
-                    .findAll()
-                    .stream()
-                    .map(Planet::getName)
-                    .toList();
+                            if(!x.getStarships().contains(existingStarship.get())){
+                                x.getStarships().add(existingStarship.get());
+                                existingStarship.get().getFilms().add(x);
+                            }
 
-            var planetsToSave = planetsDtos
-                    .stream()
-                    .filter(Predicate.not(p -> planetsNames.contains(p.getName())))
-                    .map(p -> entityMapper.forPlanet().map(p))
-                    .toList();
+                            data.getStarships().save(existingStarship.get());
+                        } else {
+                            var starship = entityMapper.forStarship().map(starshipDto);
+                            starship.getPilots().add(existingPerson.get());
+                            existingPerson.get().getStarships().add(starship);
 
+                            if(!x.getStarships().contains(starship)){
+                                x.getStarships().add(starship);
+                                starship.getFilms().add(x);
+                            }
 
-            //Saving entities to database
+                            data.getStarships().save(starship);
+                        }
 
-            data.getPeople().saveAll(peopleToSave);
-            data.getStarships().saveAll(starshipsToSave);
-            data.getVehicles().saveAll(vehiclesToSave);
-            data.getSpecies().saveAll(speciesToSave);
-            data.getPlanets().saveAll(planetsToSave);
+                    }
+                    for(SpeciesDto speciesDto : speciesDtos){
+                        var existingSpecies = data.getSpecies().findSpeciesByName(speciesDto.getName());
+                        if(existingSpecies.isPresent()){
+                            existingSpecies.get().getPeople().add(existingPerson.get());
+                            existingPerson.get().getSpecies().add(existingSpecies.get());
 
-            //Setting relations between entities
+                            if(!x.getSpecies().contains(existingSpecies.get())){
+                                x.getSpecies().add(existingSpecies.get());
+                                existingSpecies.get().getFilms().add(x);
+                            }
 
-            peopleDto.stream().map(p -> {
-                List<SpeciesDto> personSpeciesDtos = new ArrayList<>();
-                List<StarshipDto> personStarshipsDto = new ArrayList<>();
-                List<VehicleDto> personVehiclesDto = new ArrayList<>();
-                PlanetDto personHomeworldDto = client.getPlanet(Integer.parseInt(p.getHomeworldUrl().replaceFirst(".*/([^/?]+).*", "$1")));
+                            data.getSpecies().save(existingSpecies.get());
+                        } else {
+                            var species = entityMapper.forSpecies().map(speciesDto);
+                            species.getPeople().add(existingPerson.get());
+                            existingPerson.get().getSpecies().add(species);
 
-                List<Species> personSpecies = new ArrayList<>();
-                List<Starship> personStarships = new ArrayList<>();
-                List<Vehicle> personVehicles = new ArrayList<>();
-                Planet personHomeworld;
+                            if(!x.getSpecies().contains(species)){
+                                x.getSpecies().add(species);
+                                species.getFilms().add(x);
+                            }
 
-                p.getSpeciesUrls()
-                        .forEach(l -> personSpeciesDtos.add(
-                                client.getSpecies(Integer.parseInt(l.replaceFirst(".*/([^/?]+).*", "$1"))))
-                        );
+                            data.getSpecies().save(species);
+                        }
+                    }
+//                    if(!existingPerson.get().getFilms().contains(x)){
+//                        x.getCharacters().add(existingPerson.get());
+//                        existingPerson.get().getFilms().add(x);
+//                    }
 
-                p.getStarshipsUrls()
-                        .forEach(l -> personStarshipsDto.add(
-                                client.getStarship(Integer.parseInt(l.replaceFirst(".*/([^/?]+).*", "$1"))))
-                        );
-
-                p.getVehiclesUrls()
-                        .forEach(l -> personVehiclesDto.add(
-                                client.getVehicle(Integer.parseInt(l.replaceFirst(".*/([^/?]+).*", "$1"))))
-                        );
-
-                for (SpeciesDto speciesDto : personSpeciesDtos) {
-                    personSpecies.add(entityMapper.forSpecies().map(speciesDto));
+                    data.getFilms().save(x);
+                    data.getPeople().save(existingPerson.get());
                 }
+                else {
+                    var person = entityMapper.forPerson().map(personDto);
+                    data.getPeople().save(person);
+                    for(VehicleDto vehicleDto : vehicleDtos){
+                        var existingVehicle = data.getVehicles().findVehicleByName(vehicleDto.getName());
+                        if(existingVehicle.isPresent()){
+                            existingVehicle.get().getPilots().add(person);
+                            person.getVehicles().add(existingVehicle.get());
 
-                for (VehicleDto vehicleDto : personVehiclesDto){
-                    personVehicles.add(entityMapper.forVehicle().map(vehicleDto));
+                            if(!x.getVehicles().contains(existingVehicle.get())){
+                                x.getVehicles().add(existingVehicle.get());
+                                existingVehicle.get().getFilms().add(x);
+                            }
+
+                            data.getVehicles().save(existingVehicle.get());
+                        } else {
+                            var vehicle = entityMapper.forVehicle().map(vehicleDto);
+                            vehicle.getPilots().add(person);
+                            person.getVehicles().add(vehicle);
+
+                            if(!x.getVehicles().contains(vehicle)){
+                                x.getVehicles().add(vehicle);
+                                vehicle.getFilms().add(x);
+                            }
+
+                            data.getVehicles().save(vehicle);
+                        }
+                    }
+                    for(StarshipDto starshipDto : starshipsDtos){
+                        var existingStarship = data.getStarships().findStarshipByName(starshipDto.getName());
+                        if(existingStarship.isPresent()){
+                            existingStarship.get().getPilots().add(person);
+                            person.getStarships().add(existingStarship.get());
+
+                            if(!x.getStarships().contains(existingStarship.get())){
+                                x.getStarships().add(existingStarship.get());
+                                existingStarship.get().getFilms().add(x);
+                            }
+
+                            data.getStarships().save(existingStarship.get());
+                        } else {
+                            var starship = entityMapper.forStarship().map(starshipDto);
+                            starship.getPilots().add(person);
+                            person.getStarships().add(starship);
+
+                            if(!x.getStarships().contains(starship)){
+                                x.getStarships().add(starship);
+                                starship.getFilms().add(x);
+                            }
+
+                            data.getStarships().save(starship);
+                        }
+                    }
+                    for(SpeciesDto speciesDto : speciesDtos){
+                        var existingSpecies = data.getSpecies().findSpeciesByName(speciesDto.getName());
+                        if(existingSpecies.isPresent()){
+                            existingSpecies.get().getPeople().add(person);
+                            person.getSpecies().add(existingSpecies.get());
+
+                            if(!x.getSpecies().contains(existingSpecies.get())){
+                                x.getSpecies().add(existingSpecies.get());
+                                existingSpecies.get().getFilms().add(x);
+                            }
+
+                            data.getSpecies().save(existingSpecies.get());
+                        } else {
+                            var species = entityMapper.forSpecies().map(speciesDto);
+                            species.getPeople().add(person);
+                            person.getSpecies().add(species);
+
+                            if(!x.getSpecies().contains(species)){
+                                x.getSpecies().add(species);
+                                species.getFilms().add(x);
+                            }
+
+                            data.getSpecies().save(species);
+                        }
+
+                    }
+
+//                    if(!person.getFilms().contains(x)){
+//                        x.getCharacters().add(person);
+//                        person.getFilms().add(x);
+//                    }
+                    data.getFilms().save(x);
+                    data.getPeople().save(person);
                 }
-
-                for (StarshipDto starshipDto : personStarshipsDto){
-                    personStarships.add(entityMapper.forStarship().map(starshipDto));
-                }
-
-                personHomeworld = entityMapper.forPlanet().map(personHomeworldDto);
-
-                var person = entityMapper.forPerson().map(p);
-
-                //Person - species
-                person.getSpecies().addAll(personSpecies);
-                personSpecies.forEach(s->s.getPeople().add(person));
-                //Person - film
-                person.getFilms().add(x);
-                x.getCharacters().add(person);
-                //Person - starship
-                person.getStarships().addAll(personStarships);
-                personStarships.forEach(s->s.getPilots().add(person));
-                //Person - vehicle
-                person.getVehicles().addAll(personVehicles);
-                personVehicles.forEach(v->v.getPilots().add(person));
-                //Person - planet
-                person.setHomeworld(personHomeworld);
-                personHomeworld.getResidents().add(person);
-
-
-                data.getFilms().save(x);
-                data.getStarships().saveAll(personStarships);
-                data.getVehicles().saveAll(personVehicles);
-                data.getSpecies().saveAll(personSpecies);
-                data.getPlanets().save(personHomeworld);
-                return person;
-            }).forEach(p->data.getPeople().save(p));
-
-
-
-            //Film - starship
-            for (Starship starship : data.getStarships().findAll()) {
-                x.getStarships().add(starship);
-                starship.getFilms().add(x);
-            }
-
-            //Film - vehicle
-            for (Vehicle vehicle : data.getVehicles().findAll()) {
-                x.getVehicles().add(vehicle);
-                vehicle.getFilms().add(x);
-            }
-
-            //Film - species
-            for (Species species : data.getSpecies().findAll()) {
-                x.getSpecies().add(species);
-                species.getFilms().add(x);
-            }
-
-            //Film - planet
-            for (Planet planet : data.getPlanets().findAll()) {
-                x.getPlanets().add(planet);
-                planet.getFilms().add(x);
-            }
+            });
 
             data.getFilms().save(x);
 

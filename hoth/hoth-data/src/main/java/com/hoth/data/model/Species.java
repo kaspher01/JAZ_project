@@ -5,7 +5,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -28,10 +30,10 @@ public class Species {
     private Planet homeworld;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Film> films = new ArrayList<>();
+    private Set<Film> films = new HashSet<>();
 
-    @ManyToMany
-    private List<Person> people = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Person> people = new HashSet<>();
 
 
 }
