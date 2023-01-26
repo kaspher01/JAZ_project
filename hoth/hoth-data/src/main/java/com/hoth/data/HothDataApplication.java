@@ -4,21 +4,14 @@ import com.hoth.data.repositories.ICatalogData;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 
 @SpringBootApplication
-public class HothDataApplication implements CommandLineRunner {
-
-    private final ICatalogData db;
-
-    public HothDataApplication(ICatalogData dataCatalog) {
-        this.db = dataCatalog;
-    }
+public class HothDataApplication{
 
     public static void main(String[] args) {
         SpringApplication.run(HothDataApplication.class, args);
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-    }
 }

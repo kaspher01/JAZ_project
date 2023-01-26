@@ -26,9 +26,6 @@ public class Species {
     private String skinColors;
     private String language;
 
-    @ManyToOne
-    private Planet homeworld;
-
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Film> films = new HashSet<>();
 

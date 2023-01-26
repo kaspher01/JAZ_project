@@ -75,43 +75,38 @@ public class DataUpdater implements IUpdateData {
 
                 var vehicleDtos = personDto.getVehiclesUrls()
                         .stream()
-                        .map(l -> client.getVehicle(Integer.parseInt(l.replaceFirst(".*\\/(\\d+)\\/$", "$1"))))
+                        .map(l -> client.getVehicle(Integer.parseInt(l.replaceFirst(".*/([^/?]+).*", "$1"))))
                         .toList();
 
                 var starshipsDtos = personDto.getStarshipsUrls()
                         .stream()
-                        .map(l -> client.getStarship(Integer.parseInt(l.replaceFirst(".*\\/(\\d+)\\/$", "$1"))))
+                        .map(l -> client.getStarship(Integer.parseInt(l.replaceFirst(".*/([^/?]+).*", "$1"))))
                         .toList();
 
                 var speciesDtos = personDto.getSpeciesUrls()
                         .stream()
-                        .map(l -> client.getSpecies(Integer.parseInt(l.replaceFirst(".*\\/(\\d+)\\/$", "$1"))))
+                        .map(l -> client.getSpecies(Integer.parseInt(l.replaceFirst(".*/([^/?]+).*", "$1"))))
                         .toList();
 
-                if(existingPerson.isPresent()){
+                var planetDto = client.getPlanet(Integer.parseInt(personDto.getHomeworldUrl().replaceFirst(".*/([^/?]+).*", "$1")));
 
+                if(existingPerson.isPresent()){
                     for(VehicleDto vehicleDto : vehicleDtos){
                         var existingVehicle = data.getVehicles().findVehicleByName(vehicleDto.getName());
                         if(existingVehicle.isPresent()){
                             existingVehicle.get().getPilots().add(existingPerson.get());
-                            existingPerson.get().getVehicles().add(existingVehicle.get());
 
-                            if(!x.getVehicles().contains(existingVehicle.get())){
-                                x.getVehicles().add(existingVehicle.get());
+                            if(!x.getVehicles().contains(existingVehicle.get()))
                                 existingVehicle.get().getFilms().add(x);
-                            }
 
                             data.getVehicles().save(existingVehicle.get());
                         } else {
                             var vehicle = entityMapper.forVehicle().map(vehicleDto);
 
                             vehicle.getPilots().add(existingPerson.get());
-                            existingPerson.get().getVehicles().add(vehicle);
 
-                            if(!x.getVehicles().contains(vehicle)){
-                                x.getVehicles().add(vehicle);
+                            if(!x.getVehicles().contains(vehicle))
                                 vehicle.getFilms().add(x);
-                            }
 
                             data.getVehicles().save(vehicle);
                         }
@@ -120,23 +115,17 @@ public class DataUpdater implements IUpdateData {
                         var existingStarship = data.getStarships().findStarshipByName(starshipDto.getName());
                         if(existingStarship.isPresent()){
                             existingStarship.get().getPilots().add(existingPerson.get());
-                            existingPerson.get().getStarships().add(existingStarship.get());
 
-                            if(!x.getStarships().contains(existingStarship.get())){
-                                x.getStarships().add(existingStarship.get());
+                            if(!x.getStarships().contains(existingStarship.get()))
                                 existingStarship.get().getFilms().add(x);
-                            }
 
                             data.getStarships().save(existingStarship.get());
                         } else {
                             var starship = entityMapper.forStarship().map(starshipDto);
                             starship.getPilots().add(existingPerson.get());
-                            existingPerson.get().getStarships().add(starship);
 
-                            if(!x.getStarships().contains(starship)){
-                                x.getStarships().add(starship);
+                            if(!x.getStarships().contains(starship))
                                 starship.getFilms().add(x);
-                            }
 
                             data.getStarships().save(starship);
                         }
@@ -146,58 +135,64 @@ public class DataUpdater implements IUpdateData {
                         var existingSpecies = data.getSpecies().findSpeciesByName(speciesDto.getName());
                         if(existingSpecies.isPresent()){
                             existingSpecies.get().getPeople().add(existingPerson.get());
-                            existingPerson.get().getSpecies().add(existingSpecies.get());
 
-                            if(!x.getSpecies().contains(existingSpecies.get())){
-                                x.getSpecies().add(existingSpecies.get());
+                            if(!x.getSpecies().contains(existingSpecies.get()))
                                 existingSpecies.get().getFilms().add(x);
-                            }
 
                             data.getSpecies().save(existingSpecies.get());
                         } else {
                             var species = entityMapper.forSpecies().map(speciesDto);
                             species.getPeople().add(existingPerson.get());
-                            existingPerson.get().getSpecies().add(species);
 
-                            if(!x.getSpecies().contains(species)){
-                                x.getSpecies().add(species);
+                            if(!x.getSpecies().contains(species))
                                 species.getFilms().add(x);
-                            }
 
                             data.getSpecies().save(species);
                         }
                     }
 
-                    //                        x.getCharacters().add(existingPerson.get());
-                    existingPerson.get().getFilms().add(x);
+                    var existingPlanet = data.getPlanets().findPlanetByName(planetDto.getName());
+                    if(existingPlanet.isPresent()){
+                        existingPlanet.get().getResidents().add(existingPerson.get());
 
+                        if(!x.getPlanets().contains(existingPlanet.get()))
+                            existingPlanet.get().getFilms().add(x);
+
+                        data.getPlanets().save(existingPlanet.get());
+                    }
+                    else {
+                        var planet = entityMapper.forPlanet().map(planetDto);
+                        planet.getResidents().add(existingPerson.get());
+
+                        if(!x.getPlanets().contains(planet))
+                            planet.getFilms().add(x);
+
+                        data.getPlanets().save(planet);
+
+                    }
+                    existingPerson.get().getFilms().add(x);
                     data.getFilms().save(x);
                     data.getPeople().save(existingPerson.get());
                 }
                 else {
                     var person = entityMapper.forPerson().map(personDto);
                     data.getPeople().save(person);
+
                     for(VehicleDto vehicleDto : vehicleDtos){
                         var existingVehicle = data.getVehicles().findVehicleByName(vehicleDto.getName());
                         if(existingVehicle.isPresent()){
                             existingVehicle.get().getPilots().add(person);
-                            person.getVehicles().add(existingVehicle.get());
 
-                            if(!x.getVehicles().contains(existingVehicle.get())){
-                                x.getVehicles().add(existingVehicle.get());
+                            if(!x.getVehicles().contains(existingVehicle.get()))
                                 existingVehicle.get().getFilms().add(x);
-                            }
 
                             data.getVehicles().save(existingVehicle.get());
                         } else {
                             var vehicle = entityMapper.forVehicle().map(vehicleDto);
                             vehicle.getPilots().add(person);
-                            person.getVehicles().add(vehicle);
 
-                            if(!x.getVehicles().contains(vehicle)){
-                                x.getVehicles().add(vehicle);
+                            if(!x.getVehicles().contains(vehicle))
                                 vehicle.getFilms().add(x);
-                            }
 
                             data.getVehicles().save(vehicle);
                         }
@@ -206,23 +201,17 @@ public class DataUpdater implements IUpdateData {
                         var existingStarship = data.getStarships().findStarshipByName(starshipDto.getName());
                         if(existingStarship.isPresent()){
                             existingStarship.get().getPilots().add(person);
-                            person.getStarships().add(existingStarship.get());
 
-                            if(!x.getStarships().contains(existingStarship.get())){
-                                x.getStarships().add(existingStarship.get());
+                            if(!x.getStarships().contains(existingStarship.get()))
                                 existingStarship.get().getFilms().add(x);
-                            }
 
                             data.getStarships().save(existingStarship.get());
                         } else {
                             var starship = entityMapper.forStarship().map(starshipDto);
                             starship.getPilots().add(person);
-                            person.getStarships().add(starship);
 
-                            if(!x.getStarships().contains(starship)){
-                                x.getStarships().add(starship);
+                            if(!x.getStarships().contains(starship))
                                 starship.getFilms().add(x);
-                            }
 
                             data.getStarships().save(starship);
                         }
@@ -231,30 +220,40 @@ public class DataUpdater implements IUpdateData {
                         var existingSpecies = data.getSpecies().findSpeciesByName(speciesDto.getName());
                         if(existingSpecies.isPresent()){
                             existingSpecies.get().getPeople().add(person);
-                            person.getSpecies().add(existingSpecies.get());
-
-                            if(!x.getSpecies().contains(existingSpecies.get())){
-                                x.getSpecies().add(existingSpecies.get());
+                            if(!x.getSpecies().contains(existingSpecies.get()))
                                 existingSpecies.get().getFilms().add(x);
-                            }
-
                             data.getSpecies().save(existingSpecies.get());
                         } else {
                             var species = entityMapper.forSpecies().map(speciesDto);
                             species.getPeople().add(person);
-                            person.getSpecies().add(species);
-
-                            if(!x.getSpecies().contains(species)){
-                                x.getSpecies().add(species);
+                            if(!x.getSpecies().contains(species))
                                 species.getFilms().add(x);
-                            }
-
                             data.getSpecies().save(species);
                         }
 
                     }
 
-                    //                        x.getCharacters().add(person);
+                    var existingPlanet = data.getPlanets().findPlanetByName(planetDto.getName());
+                    if(existingPlanet.isPresent()){
+                        existingPlanet.get().getResidents().add(person);
+                        person.setHomeworld(existingPlanet.get());
+
+                        if(!x.getPlanets().contains(existingPlanet.get()))
+                            existingPlanet.get().getFilms().add(x);
+
+                        data.getPlanets().save(existingPlanet.get());
+                    }
+                    else {
+                        var planet = entityMapper.forPlanet().map(planetDto);
+                        planet.getResidents().add(person);
+                        person.setHomeworld(planet);
+                        if(!x.getPlanets().contains(planet))
+                            planet.getFilms().add(x);
+
+                        data.getPlanets().save(planet);
+
+                    }
+
                     person.getFilms().add(x);
                     data.getFilms().save(x);
                     data.getPeople().save(person);

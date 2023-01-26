@@ -6,6 +6,7 @@
         <option value="$PROJECT_DIR$/hoth-data/pom.xml" />
         <option value="$PROJECT_DIR$/hoth-data-updater/pom.xml" />
         <option value="$PROJECT_DIR$/hoth-starwars-client/pom.xml" />
+        <option value="$PROJECT_DIR$/hoth-web-api/pom.xml" />
       </list>
     </option>
   </component>

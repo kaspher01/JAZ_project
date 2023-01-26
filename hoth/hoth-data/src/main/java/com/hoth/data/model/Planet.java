@@ -1,14 +1,12 @@
 package com.hoth.data.model;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,10 +26,10 @@ public class Planet {
     private String terrain;
     private String surfaceWater;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Film> films = new HashSet<>();
 
-    @ManyToMany
+    @OneToMany(mappedBy = "homeworld", fetch = FetchType.EAGER)
     private Set<Person> residents = new HashSet<>();
 
 

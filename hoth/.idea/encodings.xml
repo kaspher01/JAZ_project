@@ -4,5 +4,6 @@
     <file url="file://$PROJECT_DIR$/hoth-data-updater/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/hoth-data/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/hoth-starwars-client/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hoth-web-api/src/main/java" charset="UTF-8" />
   </component>
 </project>

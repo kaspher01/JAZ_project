@@ -1,4 +1,4 @@
-package com.hoth.client.contract;
+package com.hoth.webapi.contract;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

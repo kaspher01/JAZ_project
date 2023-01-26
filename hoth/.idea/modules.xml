@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/hoth-data/hoth-data.iml" filepath="$PROJECT_DIR$/hoth-data/hoth-data.iml" />
       <module fileurl="file://$PROJECT_DIR$/hoth-data-updater/hoth-data-updater.iml" filepath="$PROJECT_DIR$/hoth-data-updater/hoth-data-updater.iml" />
       <module fileurl="file://$PROJECT_DIR$/hoth-starwars-client/hoth-starwars-client.iml" filepath="$PROJECT_DIR$/hoth-starwars-client/hoth-starwars-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hoth-web-api/hoth-web-api.iml" filepath="$PROJECT_DIR$/hoth-web-api/hoth-web-api.iml" />
     </modules>
   </component>
 </project>

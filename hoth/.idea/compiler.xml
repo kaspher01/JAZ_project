@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="hoth-web-api" />
         <module name="hoth-starwars-client" />
         <module name="hoth-data-updater" />
         <module name="hoth-data" />
@@ -16,6 +17,7 @@
       <module name="hoth-data" target="17" />
       <module name="hoth-data-updater" target="17" />
       <module name="hoth-starwars-client" target="17" />
+      <module name="hoth-web-api" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -23,6 +25,7 @@
       <module name="hoth-data" options="-parameters" />
       <module name="hoth-data-updater" options="-parameters" />
       <module name="hoth-starwars-client" options="-parameters" />
+      <module name="hoth-web-api" options="-parameters" />
     </option>
   </component>
 </project>
