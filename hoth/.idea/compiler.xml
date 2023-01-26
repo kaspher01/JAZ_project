@@ -7,8 +7,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="hoth-data-updater" />
         <module name="hoth-starwars-client" />
+        <module name="hoth-data-updater" />
         <module name="hoth-data" />
       </profile>
     </annotationProcessing>

@@ -115,7 +115,6 @@ public class DataUpdater implements IUpdateData {
 
                             data.getVehicles().save(vehicle);
                         }
-
                     }
                     for(StarshipDto starshipDto : starshipsDtos){
                         var existingStarship = data.getStarships().findStarshipByName(starshipDto.getName());
@@ -168,10 +167,9 @@ public class DataUpdater implements IUpdateData {
                             data.getSpecies().save(species);
                         }
                     }
-//                    if(!existingPerson.get().getFilms().contains(x)){
-//                        x.getCharacters().add(existingPerson.get());
-//                        existingPerson.get().getFilms().add(x);
-//                    }
+
+                    //                        x.getCharacters().add(existingPerson.get());
+                    existingPerson.get().getFilms().add(x);
 
                     data.getFilms().save(x);
                     data.getPeople().save(existingPerson.get());
@@ -256,10 +254,8 @@ public class DataUpdater implements IUpdateData {
 
                     }
 
-//                    if(!person.getFilms().contains(x)){
-//                        x.getCharacters().add(person);
-//                        person.getFilms().add(x);
-//                    }
+                    //                        x.getCharacters().add(person);
+                    person.getFilms().add(x);
                     data.getFilms().save(x);
                     data.getPeople().save(person);
                 }
