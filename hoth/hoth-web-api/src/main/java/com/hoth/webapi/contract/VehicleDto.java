@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class VehicleDto extends GetIdClass {
+public class VehicleDto{
     private String name;
     private String model;
 

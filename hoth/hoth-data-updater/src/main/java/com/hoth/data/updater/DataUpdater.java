@@ -170,9 +170,9 @@ public class DataUpdater implements IUpdateData {
                         data.getPlanets().save(planet);
 
                     }
+                    data.getPeople().save(existingPerson.get());
                     existingPerson.get().getFilms().add(x);
                     data.getFilms().save(x);
-                    data.getPeople().save(existingPerson.get());
                 }
                 else {
                     var person = entityMapper.forPerson().map(personDto);
@@ -254,9 +254,9 @@ public class DataUpdater implements IUpdateData {
 
                     }
 
+                    data.getPeople().save(person);
                     person.getFilms().add(x);
                     data.getFilms().save(x);
-                    data.getPeople().save(person);
                 }
             });
 

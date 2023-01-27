@@ -9,4 +9,7 @@ import java.util.Optional;
 public interface PersonRepository extends JpaRepository<Person, Long> {
     @Query("select p from Person p where p.name=:name")
     Optional<Person> findPersonByName(String name);
+
+    @Query("select p from Person p where p.id=:id")
+    Optional<Person> findPersonById(int id);
 }

@@ -1,20 +1,23 @@
 package com.hoth.webapi.services;
 
-import com.hoth.webapi.services.utilis.ICatalogDtoMappers;
 import com.hoth.data.model.*;
 import com.hoth.data.repositories.ICatalogData;
+import com.hoth.webapi.services.utilis.ICatalogDtoMappers;
+
+
 import com.hoth.webapi.contract.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-//@RequiredArgsConstructor
 public class FilmService implements IFilmService{
     private final ICatalogData db;
     private final ICatalogDtoMappers mapper;
 
+    @Autowired
     public FilmService(ICatalogData db, ICatalogDtoMappers mapper) {
         this.db = db;
         this.mapper = mapper;

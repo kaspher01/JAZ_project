@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FilmDto extends GetIdClass {
+public class FilmDto{
 
     private String title;
 

@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class StarshipDto extends GetIdClass {
+public class StarshipDto{
 
     private String name;
     private String model;
@@ -27,9 +27,6 @@ public class StarshipDto extends GetIdClass {
 
     @JsonProperty("max_atmosphering_speed")
     private String maxAtmospheringSpeed;
-
-    @JsonProperty("hyperdrive_rating")
-    private String hyperdriveRating;
 
     @JsonProperty("MGLT")
     private String maxMegalights;

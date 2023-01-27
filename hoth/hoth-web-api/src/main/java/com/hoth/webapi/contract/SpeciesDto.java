@@ -1,14 +1,18 @@
 package com.hoth.webapi.contract;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
 
 @Getter
 @Setter
-public class SpeciesDto extends GetIdClass{
+@AllArgsConstructor
+@NoArgsConstructor
+public class SpeciesDto{
 
     private String name;
     private String classification;
@@ -23,20 +27,8 @@ public class SpeciesDto extends GetIdClass{
     @JsonProperty("eye_colors")
     private String eyeColors;
 
-    @JsonProperty("hair_colors")
-    private String hairColors;
-
     @JsonProperty("skin_colors")
     private String skinColors;
 
     private String language;
-
-    @JsonProperty("people")
-    private List<String> peopleUrls;
-
-    @JsonProperty("films")
-    private List<String> filmsUrls;
-
-    private String created;
-    private String edited;
 }

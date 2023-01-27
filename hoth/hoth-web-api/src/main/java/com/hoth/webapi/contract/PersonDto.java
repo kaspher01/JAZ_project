@@ -10,20 +10,14 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PersonDto extends GetIdClass{
+public class PersonDto{
 
     private String name;
 
     @JsonProperty("birth_year")
     private String birthYear;
 
-    @JsonProperty("eye_color")
-    private String eyeColor;
-
     private String gender;
-
-    @JsonProperty("hair_color")
-    private String hairColor;
 
     private String height;
 

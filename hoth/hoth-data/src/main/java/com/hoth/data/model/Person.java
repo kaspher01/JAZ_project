@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +23,7 @@ public class Person {
     private String mass;
     private String skinColor;
 
-    @ManyToOne()
+    @ManyToOne
     private Planet homeworld;
 
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)

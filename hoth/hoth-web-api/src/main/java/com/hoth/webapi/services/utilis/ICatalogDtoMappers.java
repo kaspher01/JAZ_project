@@ -1,11 +1,10 @@
 package com.hoth.webapi.services.utilis;
 
-
 import com.hoth.data.model.*;
 import com.hoth.webapi.contract.*;
 import org.springframework.stereotype.Component;
 
-@Component
+
 public interface ICatalogDtoMappers {
     IMapDtos<Species, SpeciesDto> forSpecies();
 

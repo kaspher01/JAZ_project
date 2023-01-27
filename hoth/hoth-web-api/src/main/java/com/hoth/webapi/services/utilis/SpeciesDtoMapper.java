@@ -1,6 +1,6 @@
 package com.hoth.webapi.services.utilis;
 
-import com.hoth.client.contract.SpeciesDto;
+import com.hoth.webapi.contract.SpeciesDto;
 import com.hoth.data.model.Species;
 import org.springframework.stereotype.Component;
 
