@@ -22,7 +22,7 @@ public class Film {
     private String producer;
     private Date releaseDate;
 
-    @ManyToMany(mappedBy = "films", cascade = CascadeType.MERGE)
+    @ManyToMany(mappedBy = "films")
     private Set<Person> characters = new HashSet<>();
 
     @ManyToMany(mappedBy = "films")

@@ -8,6 +8,7 @@ import com.hoth.data.repositories.ICatalogData;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -152,7 +153,7 @@ public class DataUpdater implements IUpdateData {
                     }
 
                     var existingPlanet = data.getPlanets().findPlanetByName(planetDto.getName());
-                    if(existingPlanet.isPresent()){
+                    if(existingPlanet != null && existingPlanet.isPresent()){
                         existingPlanet.get().getResidents().add(existingPerson.get());
 
                         if(!x.getPlanets().contains(existingPlanet.get()))
@@ -170,8 +171,8 @@ public class DataUpdater implements IUpdateData {
                         data.getPlanets().save(planet);
 
                     }
-                    data.getPeople().save(existingPerson.get());
                     existingPerson.get().getFilms().add(x);
+                    data.getPeople().save(existingPerson.get());
                     data.getFilms().save(x);
                 }
                 else {
@@ -245,17 +246,17 @@ public class DataUpdater implements IUpdateData {
                     }
                     else {
                         var planet = entityMapper.forPlanet().map(planetDto);
-                        planet.getResidents().add(person);
                         person.setHomeworld(planet);
                         if(!x.getPlanets().contains(planet))
                             planet.getFilms().add(x);
 
                         data.getPlanets().save(planet);
-
                     }
 
-                    data.getPeople().save(person);
+
+
                     person.getFilms().add(x);
+                    data.getPeople().save(person);
                     data.getFilms().save(x);
                 }
             });
