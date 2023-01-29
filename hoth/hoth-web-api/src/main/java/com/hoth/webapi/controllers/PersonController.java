@@ -4,10 +4,7 @@ import com.hoth.webapi.contract.PersonDto;
 import com.hoth.webapi.services.IPersonService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/people")
@@ -20,6 +17,11 @@ public class PersonController {
     public PersonDto getPersonById(@PathVariable("id") int personId){
         log.warn("Exposing person with id: " + personId);
         return personService.getPersonById(personId);
+    }
+
+    @PutMapping("/{id}")
+    public void updatePersonById(@PathVariable("id") int personId, @RequestBody PersonDto personDto){
+        personService.updatePersonById(personId, personDto);
     }
 
 }

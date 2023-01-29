@@ -1,32 +1,31 @@
-2023-01-28 23:32:15,080 INFO o.s.b.StartupInfoLogger [main] Starting HothWebApiApplication using Java 17.0.5 with PID 9808 (D:\INNE\java\JAZ_project\hoth\hoth-web-api\target\classes started by kacpe in D:\INNE\java\JAZ_project\hoth)
-2023-01-28 23:32:15,087 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.0, Spring v6.0.2
-2023-01-28 23:32:15,089 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
-2023-01-28 23:32:15,692 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-01-28 23:32:15,765 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 66 ms. Found 6 JPA repository interfaces.
-2023-01-28 23:32:16,208 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
-2023-01-28 23:32:16,218 INFO o.a.j.l.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
-2023-01-28 23:32:16,219 INFO o.a.j.l.DirectJDKLog [main] Starting service [Tomcat]
-2023-01-28 23:32:16,219 INFO o.a.j.l.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/10.1.1]
-2023-01-28 23:32:16,311 INFO o.a.j.l.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
-2023-01-28 23:32:16,311 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1184 ms
-2023-01-28 23:32:16,450 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
-2023-01-28 23:32:16,594 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3af10d0b
-2023-01-28 23:32:16,596 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
-2023-01-28 23:32:16,636 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-01-28 23:32:16,696 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.1.5.Final
-2023-01-28 23:32:16,858 WARN o.h.b.i.MetadataBuilderImpl$MetadataBuildingOptionsImpl [main] HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
-2023-01-28 23:32:17,007 INFO o.h.e.j.d.i.DialectFactoryImpl [main] HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
-2023-01-28 23:32:17,826 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-01-28 23:32:17,836 INFO o.s.o.j.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-01-28 23:32:18,447 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-01-28 23:32:18,725 INFO o.a.j.l.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
-2023-01-28 23:32:18,744 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
-2023-01-28 23:32:18,752 INFO o.s.b.StartupInfoLogger [main] Started HothWebApiApplication in 4.087 seconds (process running for 5.122)
-2023-01-28 23:32:45,915 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-01-28 23:32:45,915 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
-2023-01-28 23:32:45,916 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 1 ms
-2023-01-28 23:32:45,949 WARN c.h.w.c.PersonController [http-nio-8080-exec-1] Exposing person with id: 502
-2023-01-28 23:33:33,091 WARN c.h.w.c.PersonController [http-nio-8080-exec-2] Exposing person with id: 503
-2023-01-28 23:33:46,407 INFO o.s.o.j.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-01-28 23:33:46,408 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
-2023-01-28 23:33:46,417 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2023-01-29 12:10:00,716 INFO o.s.b.StartupInfoLogger [main] Starting HothWebApiApplication using Java 17.0.5 with PID 6976 (D:\INNE\java\JAZ_project\hoth\hoth-web-api\target\classes started by kacpe in D:\INNE\java\JAZ_project\hoth)
+2023-01-29 12:10:00,723 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v3.0.0, Spring v6.0.2
+2023-01-29 12:10:00,725 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2023-01-29 12:10:01,273 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-01-29 12:10:01,342 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 61 ms. Found 6 JPA repository interfaces.
+2023-01-29 12:10:01,753 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2023-01-29 12:10:01,761 INFO o.a.j.l.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2023-01-29 12:10:01,762 INFO o.a.j.l.DirectJDKLog [main] Starting service [Tomcat]
+2023-01-29 12:10:01,763 INFO o.a.j.l.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/10.1.1]
+2023-01-29 12:10:01,850 INFO o.a.j.l.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2023-01-29 12:10:01,850 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1088 ms
+2023-01-29 12:10:01,975 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2023-01-29 12:10:02,114 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@24a0c58b
+2023-01-29 12:10:02,115 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2023-01-29 12:10:02,154 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-01-29 12:10:02,209 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.1.5.Final
+2023-01-29 12:10:02,363 WARN o.h.b.i.MetadataBuilderImpl$MetadataBuildingOptionsImpl [main] HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2023-01-29 12:10:02,509 INFO o.h.e.j.d.i.DialectFactoryImpl [main] HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-01-29 12:10:03,282 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-01-29 12:10:03,290 INFO o.s.o.j.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-01-29 12:10:03,881 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-01-29 12:10:04,147 INFO o.a.j.l.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2023-01-29 12:10:04,166 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2023-01-29 12:10:04,173 INFO o.s.b.StartupInfoLogger [main] Started HothWebApiApplication in 3.794 seconds (process running for 4.68)
+2023-01-29 12:10:07,771 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-01-29 12:10:07,772 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Initializing Servlet 'dispatcherServlet'
+2023-01-29 12:10:07,772 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Completed initialization in 0 ms
+2023-01-29 12:10:12,869 WARN c.h.w.c.PersonController [http-nio-8080-exec-3] Exposing person with id: 863
+2023-01-29 12:12:39,613 INFO o.s.o.j.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-01-29 12:12:39,615 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2023-01-29 12:12:39,622 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
